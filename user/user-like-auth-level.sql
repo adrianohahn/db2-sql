@@ -1,0 +1,15 @@
+SELECT
+    GRANTEE,
+    AUTHHOWGOT,
+    CASE(AUTHHOWGOT)
+            WHEN 'C' THEN 'DBCTRL'
+            WHEN 'D' THEN 'DBADM'
+            WHEN 'E' THEN 'SECADM'
+            WHEN 'G' THEN 'ACCESSCTRL'
+            WHEN 'K' THEN 'SQLADM'
+            WHEN 'L' THEN 'SYSCTRL'
+            WHEN 'M' THEN 'DBMAINT'
+            WHEN 'O' THEN 'SYSOPR'
+            WHEN 'S' THEN 'SYSADM'
+    END AS LEVEL
+FROM SYSIBM.SYSUSERAUTH WHERE GRANTEE LIKE ?;
