@@ -1,0 +1,19 @@
+SELECT
+    DBNAME,
+    SCREATOR,
+    STNAME,
+    AUTHHOWGOT,
+    CASE(AUTHHOWGOT)
+            WHEN 'B' THEN 'System DBADM'
+            WHEN 'C' THEN 'DBCTRL'
+            WHEN 'D' THEN 'DBADM'
+            WHEN 'E' THEN 'SECADM'
+            WHEN 'G' THEN 'ACCESSCTRL'
+            WHEN 'K' THEN 'SQLADM'
+            WHEN 'L' THEN 'SYSCTRL'
+            WHEN 'M' THEN 'DBMAINT'
+            WHEN 'S' THEN 'SYSADM'
+            WHEN 'T' THEN 'DATAACCESS'
+    END AS LEVEL,
+    GRANTOR
+FROM SYSIBM.SYSTABAUTH WHERE GRANTEE = :GRANTEE;

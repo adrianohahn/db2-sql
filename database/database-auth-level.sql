@@ -1,0 +1,14 @@
+SELECT
+    GRANTEE,
+    AUTHHOWGOT,
+    CASE(AUTHHOWGOT)
+            WHEN 'C' THEN 'DBCTRL'
+            WHEN 'D' THEN 'DBADM'
+            WHEN 'E' THEN 'SECADM'
+            WHEN 'G' THEN 'ACCESSCTRL'
+            WHEN 'L' THEN 'SYSCTRL'
+            WHEN 'M' THEN 'DBMAINT'
+            WHEN 'S' THEN 'SYSADM'
+    END AS LEVEL,
+    GRANTOR
+FROM SYSIBM.SYSDBAUTH WHERE NAME = :DBNAME;

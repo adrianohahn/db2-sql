@@ -1,0 +1,24 @@
+SELECT
+    DBNAME,
+    SCREATOR,
+    STNAME,
+    CASE (GRANTEETYPE)
+            WHEN 'L' THEN 'ROLE'
+            ELSE 'AUTHORIZATION ID'
+    END AS "GRANTEE TYPE",
+    GRANTEE,
+    AUTHHOWGOT,
+    CASE(AUTHHOWGOT)
+            WHEN 'B' THEN 'System DBADM'
+            WHEN 'C' THEN 'DBCTRL'
+            WHEN 'D' THEN 'DBADM'
+            WHEN 'E' THEN 'SECADM'
+            WHEN 'G' THEN 'ACCESSCTRL'
+            WHEN 'K' THEN 'SQLADM'
+            WHEN 'L' THEN 'SYSCTRL'
+            WHEN 'M' THEN 'DBMAINT'
+            WHEN 'S' THEN 'SYSADM'
+            WHEN 'T' THEN 'DATAACCESS'
+    END AS LEVEL,
+    GRANTOR
+FROM SYSIBM.SYSTABAUTH WHERE TCREATOR = :CREATOR AND TTNAME = :TABLENAME;

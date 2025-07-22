@@ -1,0 +1,19 @@
+SELECT
+    NAME,
+    GRANTEE,
+    CASE (GRANTEETYPE)
+            WHEN 'L' THEN 'ROLE'
+            ELSE 'AUTHORIZATION ID'
+    END AS "GRANTEE TYPE",
+    AUTHHOWGOT,
+    CASE(AUTHHOWGOT)
+            WHEN 'C' THEN 'DBCTRL'
+            WHEN 'D' THEN 'DBADM'
+            WHEN 'E' THEN 'SECADM'
+            WHEN 'G' THEN 'ACCESSCTRL'
+            WHEN 'L' THEN 'SYSCTRL'
+            WHEN 'M' THEN 'DBMAINT'
+            WHEN 'S' THEN 'SYSADM'
+    END AS LEVEL,
+    GRANTOR
+FROM SYSIBM.SYSDBAUTH WHERE NAME LIKE :DBNAME;
